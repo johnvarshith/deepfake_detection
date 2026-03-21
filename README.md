@@ -1,3 +1,7 @@
+Here’s your polished **GitHub README.md** — clean, structured, and ready to paste directly into your repo:
+
+---
+
 ```markdown
 # 🛡️ DeepGuard AI - Deepfake Detection System
 
