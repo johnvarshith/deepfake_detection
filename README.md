@@ -1,4 +1,4 @@
-Here’s your polished **GitHub README.md** — clean, structured, and ready to paste directly into your repo:
+Here's your **updated and enhanced GitHub README.md** with all the new features (MongoDB History, Analysis Dashboard, Smart Ensemble):
 
 ---
 
@@ -8,27 +8,30 @@ Here’s your polished **GitHub README.md** — clean, structured, and ready to 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange)](https://pytorch.org/)
 [![Flask](https://img.shields.io/badge/Flask-2.0%2B-lightgrey)](https://flask.palletsprojects.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-6.0%2B-green)](https://www.mongodb.com/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-A production-ready deepfake detection system using **CNN-LSTM architecture with attention mechanism** and **smart ensemble voting**. Achieves **93.4% accuracy** on the DFD dataset.
+A production-ready deepfake detection system using **CNN-LSTM architecture with attention mechanism** and **smart ensemble voting**. Achieves **93.4% accuracy** on the DFD dataset with real-time detection and persistent history tracking.
 
 ---
 
 ## 🎯 Key Features
 
-- 🧠 **CNN-LSTM Architecture** – EfficientNet-B0 for spatial features + Bi-LSTM for temporal patterns  
-- 🔍 **Attention Mechanism** – Learns which frames are most important  
-- 🤖 **Smart Ensemble Voting** – 3-model ensemble with 93.4% accuracy  
-- 🚀 **Real-time Detection** – 2–5 seconds per video (GPU)  
-- 🌐 **Web Interface** – Interactive UI with model switching  
-- 📊 **Evaluation Metrics** – Confusion matrix, ROC curve, classification report  
+- 🧠 **CNN-LSTM Architecture** – EfficientNet-B0 for spatial features + Bi-LSTM for temporal patterns
+- 🔍 **Attention Mechanism** – Learns which frames are most important for detection
+- 🤖 **Smart Ensemble Voting** – 3-model ensemble with 93.4% accuracy
+- 🚀 **Real-time Detection** – 2–5 seconds per video with GPU acceleration
+- 🌐 **Web Interface** – Modern UI with drag-and-drop upload, model switching, and animated confidence bars
+- 📊 **Detection History** – All detections stored in MongoDB with filtering and analytics
+- 📈 **Performance Dashboard** – Interactive charts for training curves, confusion matrix, ROC curve, and model comparison
+- 🔄 **Model Switching** – Toggle between Single, 2-Ensemble, and 3-Ensemble models
 
 ---
 
 ## 📊 Performance Results
 
 | Model | Accuracy | AUC |
-|------|---------|-----|
+|-------|----------|-----|
 | Model A | 89.5% | 0.910 |
 | Model B | 94.0% | 0.971 |
 | Model C | 92.4% | 0.975 |
@@ -38,27 +41,39 @@ A production-ready deepfake detection system using **CNN-LSTM architecture with 
 
 | Metric | Real | Fake |
 |--------|------|------|
-| Precision | 61% | 99% |
-| Recall | 88% | 94% |
-| F1-Score | 72% | 96% |
+| Precision | 61% | **99%** |
+| Recall | 88% | **94%** |
+| F1-Score | 72% | **96%** |
+
+### Confusion Matrix
+
+```
+              Predicted
+              REAL    FAKE
+Actual  REAL    46       6
+        FAKE    30     434
+```
+
+- **Fake Detection Rate:** 94% (434/464)
+- **Real Detection Rate:** 88% (46/52)
+- **Overall Accuracy:** 93.4%
+- **ROC-AUC:** 0.969
 
 ---
 
 ## 🏗️ Architecture Overview
 
 ```
-
-Input Video → Face Detection (MTCNN) → Frame Sampling (20 frames)
-↓
-Spatial Features (EfficientNet-B0)
-↓
-Temporal Modeling (Bi-LSTM + Attention)
-↓
-Smart Ensemble (3 Models)
-↓
-Output: REAL / FAKE (with confidence)
-
-````
+Input Video → Face Detection (MTCNN) → Frame Sampling (20 frames, 128×128)
+                    ↓
+         Spatial Features (EfficientNet-B0)
+                    ↓
+         Temporal Modeling (Bi-LSTM + Attention)
+                    ↓
+         Smart Ensemble (3 Models with Voting)
+                    ↓
+         Output: REAL / FAKE (with confidence %)
+```
 
 ---
 
@@ -66,15 +81,18 @@ Output: REAL / FAKE (with confidence)
 
 ### 🔧 Prerequisites
 - Python 3.8+
-- CUDA GPU (recommended)
+- CUDA GPU (recommended for real-time inference)
+- MongoDB (for history tracking)
 - 8GB+ RAM
 
 ### ⚙️ Installation
 
 ```bash
+# Clone repository
 git clone https://github.com/johnvarshith/deepguard-ai.git
 cd deepguard-ai
 
+# Create virtual environment
 python -m venv venv
 
 # Activate environment
@@ -83,23 +101,31 @@ venv\Scripts\activate
 # Linux/Mac:
 source venv/bin/activate
 
+# Install dependencies
 pip install -r requirements.txt
-````
-
----
+```
 
 ### 📥 Download Pretrained Models
 
-Download from:
-👉 [https://github.com/johnvarshith/deepguard-ai/releases](https://github.com/johnvarshith/deepguard-ai/releases)
+Download from: 👉 [GitHub Releases](https://github.com/johnvarshith/deepguard-ai/releases)
 
 Place inside `/models`:
+- `deepfake_model_ensemble_A.pth`
+- `deepfake_model_ensemble_B.pth`
+- `deepfake_model_ensemble_C.pth`
 
-* `deepfake_model_ensemble_A.pth`
-* `deepfake_model_ensemble_B.pth`
-* `deepfake_model_ensemble_C.pth`
+### 🗄️ Start MongoDB (Optional for History)
 
----
+```bash
+# Windows (if installed as service)
+net start MongoDB
+
+# Linux/Mac
+sudo systemctl start mongod
+
+# Or run MongoDB locally
+mongod --dbpath ./data
+```
 
 ### ▶️ Run Web App
 
@@ -107,8 +133,7 @@ Place inside `/models`:
 python webapp/app.py
 ```
 
-Open:
-👉 [http://localhost:5000](http://localhost:5000)
+Open: 👉 [http://localhost:5000](http://localhost:5000)
 
 ---
 
@@ -117,33 +142,38 @@ Open:
 ```
 deepguard-ai/
 │
-├── models/
-│   ├── cnn_lstm_model.py
-│   ├── ensemble_3models.py
-│   └── ensemble_2models.py
+├── models/                          # Model architectures
+│   ├── cnn_lstm_model.py            # CNN-LSTM with attention
+│   ├── ensemble_3models.py          # 3-model smart ensemble
+│   └── ensemble_2models.py          # 2-model ensemble
 │
-├── webapp/
-│   ├── app.py
+├── webapp/                          # Flask web application
+│   ├── app.py                       # Main application with MongoDB
 │   ├── templates/
-│   │   ├── index.html
-│   │   ├── result.html
-│   │   ├── about.html
-│   │   ├── documentation.html
-│   │   └── settings.html
-│   └── uploads/
+│   │   ├── index.html               # Upload page
+│   │   ├── result.html              # Results page
+│   │   ├── about.html               # Project info
+│   │   ├── documentation.html       # API docs
+│   │   ├── settings.html            # Model selection
+│   │   ├── history.html             # Detection history
+│   │   └── analysis.html            # Performance dashboard
+│   └── uploads/                     # Temporary uploads
 │
-├── preprocessing/
-│   ├── face_detection.py
-│   ├── extract_faces.py
-│   └── data_loader.py
+├── preprocessing/                   # Face extraction
+│   ├── face_detection.py            # MTCNN face detection
+│   ├── extract_faces.py             # Face extraction pipeline
+│   └── data_loader.py               # Dataset loader
 │
-├── training/
-│   ├── train_ensemble.py
-│   ├── evaluate_ensemble.py
-│   └── outputs/
+├── training/                        # Training & evaluation
+│   ├── train_ensemble.py            # Train 3 models
+│   ├── evaluate_ensemble.py         # Evaluate ensemble
+│   └── outputs/                     # PNG results
+│       ├── ensemble_confusion_matrix.png
+│       ├── ensemble_roc_curve.png
+│       └── model_comparison.png
 │
-├── utils/
-│   └── video_utils.py
+├── utils/                           # Utilities
+│   └── video_utils.py               # Video loading functions
 │
 ├── requirements.txt
 └── README.md
@@ -154,13 +184,13 @@ deepguard-ai/
 ## 🧪 Training Your Own Models
 
 ```bash
-# Extract faces
+# Extract faces from videos
 python preprocessing/extract_faces.py
 
-# Train ensemble
+# Train ensemble (3 models with different seeds)
 python training/train_ensemble.py
 
-# Evaluate
+# Evaluate ensemble performance
 python training/evaluate_ensemble.py
 ```
 
@@ -169,14 +199,14 @@ python training/evaluate_ensemble.py
 ## 📡 API Endpoints
 
 ### 🔹 POST `/api/predict`
+Upload video for deepfake detection.
 
 ```bash
 curl -X POST http://localhost:5000/api/predict \
   -F "video=@video.mp4"
 ```
 
-#### Response:
-
+**Response:**
 ```json
 {
   "success": true,
@@ -188,90 +218,124 @@ curl -X POST http://localhost:5000/api/predict \
 }
 ```
 
----
+### 🔹 GET `/api/history`
+Get detection history with optional filtering.
+
+```bash
+curl -X GET "http://localhost:5000/api/history?limit=50&filter=FAKE"
+```
 
 ### 🔹 GET `/api/stats`
+Get system statistics (total detections, accuracy, etc.)
 
-Returns model performance statistics.
+### 🔹 DELETE `/api/history/clear`
+Clear all detection history.
 
 ---
 
-## 🖼️ Results
+## 🖼️ Results & Visualizations
 
 ### Confusion Matrix
-
 ![Confusion Matrix](training/outputs/ensemble_confusion_matrix.png)
 
-### ROC Curve
-
+### ROC Curve (AUC = 0.969)
 ![ROC Curve](training/outputs/ensemble_roc_curve.png)
+
+### Model Performance Comparison
+![Model Comparison](training/outputs/model_comparison.png)
+
+### Training Curves
+![Training Curves](training/outputs/training_curves.png)
+
+### Confidence Distribution
+![Confidence Distribution](training/outputs/confidence_distribution.png)
+
+### Learning Rate Schedule
+![Learning Rate Schedule](training/outputs/learning_rate_schedule.png)
 
 ---
 
 ## 📊 Dataset
 
-* **Dataset**: Google DFD (Deepfake Detection)
-* **Total Videos**: 3,431
+| Category | Count | Source |
+|----------|-------|--------|
+| **Real Videos** | 363 | DFD Original Sequences |
+| **Fake Videos** | 3,068 | DFD Manipulated Sequences |
+| **Total** | **3,431** | Google/Jigsaw Dataset |
 
-  * Real: 363
-  * Fake: 3,068
-* **Scenes**: 16
-* **Resolution**: 128×128
-* **Frames per video**: 20
+**Scene Distribution (16 scenes):**
+- exit_phone_room, hugging_happy, kitchen_pan, kitchen_still
+- meeting_serious, outside_talking, podium_speech_happy
+- secret_conversation, talking_against_wall, talking_angry_couch
+- walking_and_outside_surprised, walking_down_indoor_hall_disgust
+- walking_down_street_outside_angry, walking_outside_cafe_disgusted
+- walk_down_hall_angry, and more
+
+**Split:** 70% Training / 15% Validation / 15% Testing
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category        | Tools                                  |
-| --------------- | -------------------------------------- |
-| Deep Learning   | PyTorch, EfficientNet, LSTM, Attention |
-| Computer Vision | OpenCV, MTCNN                          |
-| Backend         | Flask                                  |
-| Frontend        | Tailwind CSS                           |
-| GPU             | CUDA (RTX 3050)                        |
+| Category | Technologies |
+|----------|--------------|
+| **Deep Learning** | PyTorch 2.0+, EfficientNet-B0, Bi-LSTM, Attention |
+| **Computer Vision** | OpenCV, MTCNN (FaceNet-PyTorch) |
+| **Backend** | Flask, MongoDB (PyMongo) |
+| **Frontend** | HTML5, Tailwind CSS, JavaScript, Chart.js |
+| **GPU Acceleration** | CUDA, NVIDIA RTX 3050 (4GB VRAM) |
+| **Visualization** | Matplotlib, Seaborn |
 
 ---
 
 ## 📈 Future Improvements
 
-* [ ] Add Celeb-DF & FaceForensics++
-* [ ] Transformer-based architecture
-* [ ] Audio-based detection
-* [ ] Cloud deployment (AWS/GCP)
-* [ ] Mobile integration
+- [ ] Add more datasets (Celeb-DF, FaceForensics++)
+- [ ] Implement Transformer-based architecture
+- [ ] Add audio analysis for multimodal detection
+- [ ] Deploy as cloud service (AWS/GCP)
+- [ ] Mobile app integration
+- [ ] Real-time video stream detection
 
 ---
 
 ## 📝 License
 
-MIT License – see `LICENSE`
+MIT License – see [LICENSE](LICENSE) file.
 
 ---
 
 ## 👨‍💻 Author
 
 **John Varshith**
-
-* GitHub: [https://github.com/johnvarshith](https://github.com/johnvarshith)
-* Email: [johnvarshith2004@gmail.com](mailto:johnvarshith2004@gmail.com)
-* LinkedIn: [https://linkedin.com/in/johnvarshith](https://linkedin.com/in/johnvarshith)
+- GitHub: [@johnvarshith](https://github.com/johnvarshith)
+- Email: johnvarshith2004@gmail.com
+- LinkedIn: [Connect on LinkedIn](https://linkedin.com/in/johnvarshith)
 
 ---
 
 ## 🙏 Acknowledgments
 
-* Google/Jigsaw DFD Dataset
-* FaceNet-PyTorch (MTCNN)
-* PyTorch Team
+- Google/Jigsaw for DFD Dataset
+- FaceNet-PyTorch for MTCNN implementation
+- PyTorch Team for deep learning framework
+- Flask for web framework
 
 ---
 
-⭐ **Star this repo if you found it useful!**
+## ⭐ Star this repo if you found it useful!
 
 ```
 
 ---
 
-If you want, I can **make it even more impressive for recruiters** (add badges like downloads, demo GIF, architecture diagram, or deployment link).
-```
+This README now includes:
+- ✅ MongoDB history tracking
+- ✅ Analysis dashboard with charts
+- ✅ All API endpoints
+- ✅ Complete project structure
+- ✅ All result visualizations
+- ✅ Detailed dataset information
+- ✅ Updated tech stack
+
+Just copy and paste this into your `README.md` file! 🚀
