@@ -234,19 +234,26 @@ Clear all detection history.
 ![Confusion Matrix](training/outputs/ensemble_confusion_matrix.png)
 
 ### ROC Curve (AUC = 0.969)
-![ROC Curve](training/outputs/ensemble_roc_curve.png)
+![ROC Curve]<img width="800" height="600" alt="ensemble_roc_curve" src="https://github.com/user-attachments/assets/e9abbee7-781a-4fc6-bebb-bda2e2d44b9d" />
+
 
 ### Model Performance Comparison
-![Model Comparison](training/outputs/model_comparison.png)
+![Model Comparison](training/outputs/model_comparison.png)<img width="1782" height="733" alt="model_comparison" src="https://github.com/user-attachments/assets/46b560ec-6568-4d54-abcd-5cbdc1653f38" />
+
 
 ### Training Curves
-![Training Curves](training/outputs/training_curves.png)
+![Training Curves](training/outputs/training_curves.png)<img width="2082" height="730" alt="training_curves" src="https://github.com/user-attachments/assets/441927fa-3311-4bb8-89cd-344bc0ecabe4" />
+
 
 ### Confidence Distribution
-![Confidence Distribution](training/outputs/confidence_distribution.png)
+![Confidence Distribution](training/outputs/confidence_distribution.png)<img width="1482" height="880" alt="confidence_distribution" src="https://github.com/user-attachments/assets/f97fc25a-44a6-4366-a548-b71812687611" />
+
 
 ### Learning Rate Schedule
-![Learning Rate Schedule](training/outputs/learning_rate_schedule.png)
+![Learning Rate Schedule](training/outputs/learning_rate_schedule.png)<img width="1481" height="880" alt="learning_rate_schedule" src="https://github.com/user-attachments/assets/77e7aa6e-7e13-45b7-a792-67ef678d3af6" />
+
+### Accuracy curve
+<img width="1481" height="880" alt="learning_rate_schedule" src="https://github.com/user-attachments/assets/91bcbc82-a0ba-4163-a11e-d4453c409bd2" />
 
 ---
 
