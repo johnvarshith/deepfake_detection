@@ -301,12 +301,6 @@ Clear all detection history.
 
 ---
 
-## 📝 License
-
-MIT License – see [LICENSE](LICENSE) file.
-
----
-
 ## 👨‍💻 Author
 
 **John Varshith**
