@@ -1,8 +1,4 @@
-Here's your **updated and enhanced GitHub README.md** with all the new features (MongoDB History, Analysis Dashboard, Smart Ensemble):
 
----
-
-```markdown
 # 🛡️ DeepGuard AI - Deepfake Detection System
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
@@ -47,12 +43,11 @@ A production-ready deepfake detection system using **CNN-LSTM architecture with 
 
 ### Confusion Matrix
 
-```
               Predicted
               REAL    FAKE
 Actual  REAL    46       6
         FAKE    30     434
-```
+
 
 - **Fake Detection Rate:** 94% (434/464)
 - **Real Detection Rate:** 88% (46/52)
