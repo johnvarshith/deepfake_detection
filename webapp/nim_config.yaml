@@ -1,0 +1,26 @@
+# NVIDIA NIM Integration Configuration
+nim:
+  # Main killswitch - change to true when services are running locally
+  enabled: false
+  
+  # Services and Endpoints
+  services:
+    face_detection:
+      endpoint: "http://localhost:8000/v1/vision/face-detection"
+      timeout_seconds: 5
+      model_name: "nvidia/nim/face-detection:1.0.0"
+      
+    llm:
+      endpoint: "http://localhost:8001/v1/chat/completions"
+      timeout_seconds: 15
+      model_name: "meta/llama3-8b-instruct"
+      
+    deepfake_model:
+      endpoint: "http://localhost:8002/v1/models/deepfake/infer"
+      timeout_seconds: 10
+      model_name: "deepfake-trt"
+      
+  # Container deployment parameters (for setup scripts)
+  deployment:
+    gpu_devices: "all"
+    registry: "nvcr.io"
